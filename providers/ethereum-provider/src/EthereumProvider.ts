@@ -312,7 +312,7 @@ export class EthereumProvider implements IEthereumProvider {
     if (this.session) {
       await this.signer.disconnect();
     }
-    this.reset();
+    this.resetProperties();
   }
 
   public on: IEthereumProviderEvents["on"] = (event, listener) => {
@@ -377,7 +377,7 @@ export class EthereumProvider implements IEthereumProvider {
     this.signer.on(
       "session_delete",
       (payload: SignClientTypes.EventArguments["session_delete"]) => {
-        this.reset();
+        this.resetProperties();
         this.events.emit("session_delete", payload);
         this.events.emit("disconnect", {
           ...getSdkError("USER_DISCONNECTED"),
@@ -551,7 +551,7 @@ export class EthereumProvider implements IEthereumProvider {
     this.setAccounts(namespace?.accounts);
   }
 
-  protected reset() {
+  protected resetProperties() {
     this.chainId = 1;
     this.accounts = [];
   }

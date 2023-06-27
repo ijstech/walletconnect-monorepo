@@ -1,0 +1,22 @@
+version: "3.1"
+services:
+  install:
+    image: node:18
+    volumes:
+      - .:/data
+    command: bash -c "cd /data && npm i"
+  build:
+    image: node:18
+    volumes:
+      - .:/data
+    command: bash -c "cd /data && npm run build"
+  installProvider:
+    image: node:18
+    volumes:
+      - .:/data
+    command: bash -c "cd /data/providers/ethereum-provider && npm i"
+  buildProvider:
+    image: node:18
+    volumes:
+      - .:/data
+    command: bash -c "cd /data/providers/ethereum-provider && npm run build"
